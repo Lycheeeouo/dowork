@@ -1,362 +1,215 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Dimension by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>微程式資訊 - 智慧學習助理 Prototype</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						micro: '#E60012', // 微程式視覺紅 (近似)
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<header class="bg-white shadow-sm">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+		<div class="flex items-center gap-3">
+			<i class="fa-solid fa-graduation-cap text-micro text-2xl"></i>
+			<h1 class="text-xl font-bold text-gray-900">AI 智慧學習助理與決策系統</h1>
+		</div>
+		<div class="flex bg-gray-100 rounded-lg p-1">
+			<button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-micro transition-all">HR 戰情室</button>
+			<button onclick="switchTab('learner')" id="btn-learner" class="px-4 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-all">員工體驗 (通訊軟體)</button>
+		</div>
+	</div>
+</header>
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>Dimension</h1>
-								<p>A fully responsive site template designed by <a href="https://html5up.net">HTML5 UP</a> and released<br />
-								for free under the <a href="https://html5up.net/license">Creative Commons</a> license.</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
-				<!-- Main -->
-					<div id="main">
+	<div id="tab-dashboard" class="space-y-6 block">
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#work">awesome work</a>.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-							</article>
+		<div class="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100 rounded-xl p-6 shadow-sm flex items-start gap-4">
+			<div class="bg-indigo-100 p-3 rounded-full text-indigo-600">
+				<i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+			</div>
+			<div>
+				<h2 class="text-lg font-bold text-indigo-900 mb-1">AI 洞察與決策建議</h2>
+				<p class="text-gray-700 leading-relaxed">
+					目前「跨領域通識課程」研發部達成率已達 <span class="font-bold text-green-600">95%</span>，但行銷部尚有 <span class="font-bold text-red-500">12</span> 人未完成。建議針對行銷部啟動第二波<span class="font-bold border-b border-indigo-300">「急迫性語氣」</span>推播，並同步寄送狀態摘要給行銷部主管。
+				</p>
+				<button class="mt-3 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+					<i class="fa-solid fa-paper-plane mr-2"></i>一鍵執行 AI 建議
+				</button>
+			</div>
+		</div>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							</article>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+				<p class="text-sm text-gray-500 mb-1">全公司整體完課率</p>
+				<div class="flex items-end gap-2">
+					<h3 class="text-3xl font-bold text-gray-900">78%</h3>
+					<span class="text-sm text-green-500 mb-1"><i class="fa-solid fa-arrow-trend-up"></i> +5%</span>
+				</div>
+				<div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+					<div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+				</div>
+			</div>
+			<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+				<p class="text-sm text-gray-500 mb-1">逾期未完成人數</p>
+				<h3 class="text-3xl font-bold text-red-500">24 <span class="text-base font-normal text-gray-500">人</span></h3>
+				<p class="text-xs text-gray-400 mt-2">主要集中於：行銷部、行政部</p>
+			</div>
+			<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+				<p class="text-sm text-gray-500 mb-1">本月 AI 自動提醒次數</p>
+				<h3 class="text-3xl font-bold text-gray-900">156 <span class="text-base font-normal text-gray-500">次</span></h3>
+				<p class="text-xs text-gray-400 mt-2">成功喚回率：68%</p>
+			</div>
+		</div>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-							</article>
+		<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+			<div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+				<h3 class="font-bold text-gray-800">進度落後名單 (優先關注)</h3>
+			</div>
+			<table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+				<thead class="bg-gray-50 text-gray-500">
+				<tr>
+					<th class="px-6 py-3 font-medium">員工姓名</th>
+					<th class="px-6 py-3 font-medium">部門</th>
+					<th class="px-6 py-3 font-medium">課程名稱</th>
+					<th class="px-6 py-3 font-medium">目前進度</th>
+					<th class="px-6 py-3 font-medium">操作</th>
+				</tr>
+				</thead>
+				<tbody class="divide-y divide-gray-200 bg-white">
+				<tr>
+					<td class="px-6 py-4 font-medium text-gray-900">王大明</td>
+					<td class="px-6 py-4 text-gray-500">行銷部</td>
+					<td class="px-6 py-4 text-gray-500">資安基礎與社交工程防範</td>
+					<td class="px-6 py-4 text-red-500 font-bold">0%</td>
+					<td class="px-6 py-4">
+						<button class="text-indigo-600 hover:text-indigo-900 font-medium">AI 獨立催繳</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="px-6 py-4 font-medium text-gray-900">林小美</td>
+					<td class="px-6 py-4 text-gray-500">行政部</td>
+					<td class="px-6 py-4 text-gray-500">微程式跨領域通識</td>
+					<td class="px-6 py-4 text-yellow-600 font-bold">45%</td>
+					<td class="px-6 py-4">
+						<button class="text-indigo-600 hover:text-indigo-900 font-medium">AI 獨立催繳</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
+	<div id="tab-learner" class="hidden max-w-3xl mx-auto">
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
+		<div class="mb-6 flex justify-center gap-4">
+			<button onclick="switchTone('warm')" id="btn-warm" class="px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700 border border-green-200 shadow-sm transition-all">模擬：兩週前 (溫馨語氣)</button>
+			<button onclick="switchTone('urgent')" id="btn-urgent" class="px-4 py-2 rounded-full text-sm font-bold bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all">模擬：三天前 (急迫語氣)</button>
+		</div>
 
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-					</footer>
-
+		<div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden flex flex-col h-[500px]">
+			<div class="bg-gray-800 px-4 py-3 flex items-center gap-3">
+				<div class="w-10 h-10 rounded-full bg-micro flex items-center justify-center text-white font-bold">AI</div>
+				<div>
+					<h3 class="text-white font-bold text-sm">微程式學習小幫手</h3>
+					<p class="text-gray-400 text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> 機器人</p>
+				</div>
 			</div>
 
-		<!-- BG -->
-			<div id="bg"></div>
+			<div class="flex-grow p-6 bg-gray-50 overflow-y-auto flex flex-col justify-end gap-4">
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+				<div id="msg-warm" class="flex gap-4">
+					<div class="w-8 h-8 rounded-full bg-micro flex-shrink-0 flex items-center justify-center text-white text-xs">AI</div>
+					<div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 max-w-[80%] text-sm text-gray-700">
+						<p class="mb-2">哈囉！最近專案辛苦了 ☕</p>
+						<p class="mb-3">系統看見您的<span class="font-bold">「微程式跨領域通識」</span>課程還有兩週到期（目前進度 0%）。本週五下午剛好有一段空檔，要不要順便把課程看完呢？隨時保持專業技能的成長喔！</p>
+						<div class="border-t border-gray-100 pt-3 flex gap-2">
+							<button class="flex-1 bg-indigo-50 text-indigo-600 py-2 rounded-lg font-medium hover:bg-indigo-100 transition-colors">前往上課</button>
+							<button class="flex-1 bg-gray-50 text-gray-500 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">加入行事曆</button>
+						</div>
+					</div>
+				</div>
 
-	</body>
+				<div id="msg-urgent" class="flex gap-4 hidden">
+					<div class="w-8 h-8 rounded-full bg-micro flex-shrink-0 flex items-center justify-center text-white text-xs">AI</div>
+					<div class="bg-red-50 p-4 rounded-2xl rounded-tl-none shadow-sm border border-red-100 max-w-[80%] text-sm text-gray-800">
+						<div class="flex items-center gap-2 text-red-600 font-bold mb-2">
+							<i class="fa-solid fa-triangle-exclamation"></i>
+							<span>【重要提醒】課程即將逾期</span>
+						</div>
+						<p class="mb-3">您的<span class="font-bold">「資安基礎與社交工程防範」</span>課程將於 <span class="font-bold text-red-600">3 天後到期</span>！目前進度仍為 0%。</p>
+						<p class="mb-3 text-xs text-gray-500">此為年度指定培訓，為避免影響您的部門完課率與後續考核，請務必於本週五前完成。</p>
+						<div class="border-t border-red-200 pt-3">
+							<button class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors shadow-sm">立即前往完成課程</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3 bg-white border-t border-gray-200">
+				<div class="bg-gray-100 rounded-full px-4 py-2 text-gray-400 text-sm">輸入對話... (例如：幫我查詢本月還有什麼課沒上)</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer class="bg-white border-t border-gray-200 mt-auto">
+	<div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
+		<p>UI Prototype Designed & Coded by 劉亮妤 (Liang-Yu, Liu) | 專為微程式資訊簡報規劃設計</p>
+	</div>
+</footer>
+
+<script>
+	function switchTab(tabId) {
+		// 控制內容區塊顯示/隱藏
+		document.getElementById('tab-dashboard').classList.toggle('hidden', tabId !== 'dashboard');
+		document.getElementById('tab-dashboard').classList.toggle('block', tabId === 'dashboard');
+		document.getElementById('tab-learner').classList.toggle('hidden', tabId !== 'learner');
+		document.getElementById('tab-learner').classList.toggle('block', tabId === 'learner');
+
+		// 控制按鈕樣式
+		const btnDash = document.getElementById('btn-dashboard');
+		const btnLearn = document.getElementById('btn-learner');
+
+		if (tabId === 'dashboard') {
+			btnDash.className = "px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-micro transition-all";
+			btnLearn.className = "px-4 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-all";
+		} else {
+			btnLearn.className = "px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-micro transition-all";
+			btnDash.className = "px-4 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-all";
+		}
+	}
+
+	function switchTone(tone) {
+		// 控制訊息顯示/隱藏
+		document.getElementById('msg-warm').classList.toggle('hidden', tone !== 'warm');
+		document.getElementById('msg-urgent').classList.toggle('hidden', tone !== 'urgent');
+
+		// 控制按鈕樣式
+		const btnWarm = document.getElementById('btn-warm');
+		const btnUrgent = document.getElementById('btn-urgent');
+
+		if (tone === 'warm') {
+			btnWarm.className = "px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700 border border-green-200 shadow-sm transition-all";
+			btnUrgent.className = "px-4 py-2 rounded-full text-sm font-bold bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all";
+		} else {
+			btnUrgent.className = "px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700 border border-red-200 shadow-sm transition-all";
+			btnWarm.className = "px-4 py-2 rounded-full text-sm font-bold bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all";
+		}
+	}
+</script>
+</body>
 </html>

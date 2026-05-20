@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>微程式資訊 - 智慧學習助理 Prototype</title>
+	<title>微程式資訊 - AI 智慧學習管理系統 Prototype</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<script>
@@ -11,204 +11,373 @@
 			theme: {
 				extend: {
 					colors: {
-						micro: '#E60012', // 微程式視覺紅 (近似)
+						micro: '#E60012',
+						dark: {
+							900: '#0B0F19', // Main background
+							800: '#151C2C', // Sidebar/Cards
+							700: '#1F2937', // Hover/Lighter elements
+						}
+					},
+					animation: {
+						'fade-in': 'fadeIn 0.3s ease-out forwards',
+						'slide-up': 'slideUp 0.4s ease-out forwards',
+					},
+					keyframes: {
+						fadeIn: {
+							'0%': { opacity: '0' },
+							'100%': { opacity: '1' },
+						},
+						slideUp: {
+							'0%': { opacity: '0', transform: 'translateY(10px)' },
+							'100%': { opacity: '1', transform: 'translateY(0)' },
+						}
 					}
 				}
 			}
 		}
 	</script>
+	<style>
+		body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+		::-webkit-scrollbar { width: 6px; }
+		::-webkit-scrollbar-track { background: #0B0F19; }
+		::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+		::-webkit-scrollbar-thumb:hover { background: #E60012; }
+	</style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
+<body class="bg-dark-900 text-gray-200 h-screen flex overflow-hidden selection:bg-micro selection:text-white">
 
-<header class="bg-white shadow-sm">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-		<div class="flex items-center gap-3">
-			<i class="fa-solid fa-graduation-cap text-micro text-2xl"></i>
-			<h1 class="text-xl font-bold text-gray-900">AI 智慧學習助理與決策系統</h1>
-		</div>
-		<div class="flex bg-gray-100 rounded-lg p-1">
-			<button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-micro transition-all">HR 戰情室</button>
-			<button onclick="switchTab('learner')" id="btn-learner" class="px-4 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-all">員工體驗 (通訊軟體)</button>
+<aside class="w-64 bg-dark-800 border-r border-gray-800 flex flex-col">
+	<div class="h-16 flex items-center px-6 border-b border-gray-800">
+		<i class="fa-solid fa-microchip text-micro text-2xl mr-3"></i>
+		<span class="text-white font-bold text-lg tracking-wider">MICROPROGRAM</span>
+	</div>
+	<nav class="flex-1 px-4 py-6 space-y-2">
+		<button onclick="switchTab('hr')" id="nav-hr" class="w-full flex items-center px-4 py-3 bg-micro/10 text-micro border-r-2 border-micro rounded-l-lg transition-all duration-200">
+			<i class="fa-solid fa-chart-pie w-6"></i>
+			<span class="font-medium text-sm">HR 戰情室</span>
+		</button>
+		<button onclick="switchTab('learner')" id="nav-learner" class="w-full flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-all duration-200">
+			<i class="fa-solid fa-message w-6"></i>
+			<span class="font-medium text-sm">員工通訊端</span>
+		</button>
+	</nav>
+	<div class="p-4 text-xs text-gray-500 border-t border-gray-800">
+		AI 智慧學習管理系統 v1.0
+	</div>
+</aside>
+
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+
+	<div id="view-hr" class="flex-1 flex flex-col overflow-y-auto w-full h-full animate-fade-in">
+		<header class="h-16 bg-dark-800 border-b border-gray-800 flex items-center justify-between px-8 sticky top-0 z-10">
+			<h1 class="text-xl font-bold text-white">學習成效戰情室 (Admin Dashboard)</h1>
+			<div class="flex items-center gap-3">
+				<div class="w-8 h-8 rounded-full bg-micro flex items-center justify-center text-sm font-bold text-white shadow-[0_0_10px_rgba(230,0,18,0.5)]">HR</div>
+				<span class="text-sm font-medium">系統管理員</span>
+			</div>
+		</header>
+
+		<div class="p-8 space-y-6 max-w-7xl mx-auto w-full">
+			<div class="bg-gradient-to-r from-dark-800 to-dark-700 border-l-4 border-micro rounded-lg p-5 shadow-lg flex items-start gap-4 animate-slide-up">
+				<div class="bg-micro/20 text-micro p-3 rounded-full flex-shrink-0">
+					<i class="fa-solid fa-brain text-xl"></i>
+				</div>
+				<div>
+					<h3 class="text-white font-bold text-lg mb-1">AI 決策預警與洞察</h3>
+					<p class="text-gray-300 text-sm leading-relaxed">
+						<span class="text-micro font-bold">【高風險預警】</span> 行銷部進度嚴重落後，目前僅 35% 完課率。建議立即啟動第二波急迫推播，並同步發布部門強制通告。
+					</p>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up" style="animation-delay: 0.1s;">
+				<div class="bg-dark-800 border border-gray-700 rounded-xl p-6 shadow-sm">
+					<p class="text-gray-400 text-sm font-medium mb-2">整體完課率</p>
+					<div class="flex items-end gap-3">
+						<h2 class="text-4xl font-bold text-white">75<span class="text-2xl text-gray-400">%</span></h2>
+						<span class="text-green-500 text-sm font-medium mb-1"><i class="fa-solid fa-arrow-trend-up"></i> +12%</span>
+					</div>
+				</div>
+				<div class="bg-dark-800 border border-gray-700 rounded-xl p-6 shadow-sm">
+					<p class="text-gray-400 text-sm font-medium mb-2">逾期未完成人數</p>
+					<div class="flex items-end gap-3">
+						<h2 class="text-4xl font-bold text-micro">12<span class="text-2xl text-gray-400"> 人</span></h2>
+					</div>
+				</div>
+				<div class="bg-dark-800 border border-gray-700 rounded-xl p-6 shadow-sm">
+					<p class="text-gray-400 text-sm font-medium mb-2">AI 介入降噪處理次數</p>
+					<div class="flex items-end gap-3">
+						<h2 class="text-4xl font-bold text-white">158<span class="text-2xl text-gray-400"> 次</span></h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slide-up" style="animation-delay: 0.2s;">
+				<div class="bg-dark-800 border border-gray-700 rounded-xl shadow-sm overflow-hidden flex flex-col">
+					<div class="p-5 border-b border-gray-700">
+						<h3 class="text-white font-bold">進度落後名單 (需關注)</h3>
+					</div>
+					<div class="overflow-x-auto p-5">
+						<table class="w-full text-left text-sm">
+							<thead class="text-gray-400 border-b border-gray-700">
+							<tr>
+								<th class="pb-3 font-medium">學員姓名</th>
+								<th class="pb-3 font-medium">部門</th>
+								<th class="pb-3 font-medium">課程狀態</th>
+							</tr>
+							</thead>
+							<tbody class="divide-y divide-gray-700/50">
+							<tr>
+								<td class="py-3 text-white">王小明</td>
+								<td class="py-3 text-gray-400">行銷部</td>
+								<td class="py-3"><span class="bg-red-500/20 text-red-400 px-2 py-1 rounded text-xs font-medium border border-red-500/30">進度 0%</span></td>
+							</tr>
+							<tr>
+								<td class="py-3 text-white">林雅婷</td>
+								<td class="py-3 text-gray-400">行銷部</td>
+								<td class="py-3"><span class="bg-red-500/20 text-red-400 px-2 py-1 rounded text-xs font-medium border border-red-500/30">進度 0%</span></td>
+							</tr>
+							<tr>
+								<td class="py-3 text-white">陳建宇</td>
+								<td class="py-3 text-gray-400">研發部</td>
+								<td class="py-3"><span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs font-medium border border-yellow-500/30">進度 45%</span></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="bg-dark-800 border border-gray-700 rounded-xl shadow-sm flex flex-col">
+					<div class="p-5 border-b border-gray-700 flex justify-between items-center">
+						<h3 class="text-white font-bold">發布緊急通知 (AI 輔助潤飾)</h3>
+						<span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">主管指令下行</span>
+					</div>
+					<div class="p-5 flex-1 flex flex-col gap-4">
+						<div>
+							<label class="block text-sm font-medium text-gray-400 mb-2">輸入草稿指令 (允許情緒化口語)：</label>
+							<textarea id="hr-draft-input" rows="3" class="w-full bg-dark-900 border border-gray-600 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-micro resize-none">叫行銷部禮拜五前給我上完，不然扣績效</textarea>
+						</div>
+						<button id="btn-refine" onclick="processHrRefine()" class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition-colors border border-gray-500 w-full flex items-center justify-center gap-2">
+							<i class="fa-solid fa-wand-magic-sparkles text-micro"></i> AI 專業潤飾
+						</button>
+
+						<div id="hr-refined-result" class="hidden flex-col gap-3 mt-2 animate-fade-in">
+							<label class="block text-sm font-medium text-micro"><i class="fa-solid fa-check-circle mr-1"></i> AI 潤飾結果：</label>
+							<div class="bg-[#132A1F] border border-green-800/50 p-4 rounded-lg text-green-300 text-sm leading-relaxed">
+								【重要提醒】為保障年度考核權益，請行銷部同仁於本週五前完成指定課程。
+							</div>
+							<button onclick="sendOfficialNotice()" class="bg-micro hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors shadow-[0_0_15px_rgba(230,0,18,0.4)] w-full">
+								確認發送全體通知
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</header>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+	<div id="view-learner" class="hidden flex-col h-full bg-dark-900 w-full animate-fade-in relative">
 
-	<div id="tab-dashboard" class="space-y-6 block">
-
-		<div class="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100 rounded-xl p-6 shadow-sm flex items-start gap-4">
-			<div class="bg-indigo-100 p-3 rounded-full text-indigo-600">
-				<i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+		<div class="h-16 bg-dark-800 border-b border-gray-800 flex items-center px-6 justify-between shrink-0">
+			<div class="flex items-center gap-3">
+				<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-micro to-red-800 flex items-center justify-center text-white">
+					<i class="fa-solid fa-robot"></i>
+				</div>
+				<div>
+					<h1 class="text-white font-bold text-sm">微程式學習小幫手</h1>
+					<p class="text-xs text-green-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 block"></span> 企業內部通訊整合</p>
+				</div>
 			</div>
-			<div>
-				<h2 class="text-lg font-bold text-indigo-900 mb-1">AI 洞察與決策建議</h2>
-				<p class="text-gray-700 leading-relaxed">
-					目前「跨領域通識課程」研發部達成率已達 <span class="font-bold text-green-600">95%</span>，但行銷部尚有 <span class="font-bold text-red-500">12</span> 人未完成。建議針對行銷部啟動第二波<span class="font-bold border-b border-indigo-300">「急迫性語氣」</span>推播，並同步寄送狀態摘要給行銷部主管。
-				</p>
-				<button class="mt-3 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-					<i class="fa-solid fa-paper-plane mr-2"></i>一鍵執行 AI 建議
+			<div class="flex gap-2">
+				<button onclick="triggerAIChat('14d')" class="bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded transition-colors border border-gray-600">
+					<i class="fa-regular fa-clock mr-1"></i>模擬：剩餘 14 天
+				</button>
+				<button onclick="triggerAIChat('3d')" class="bg-micro hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded transition-colors shadow-[0_0_10px_rgba(230,0,18,0.4)]">
+					<i class="fa-solid fa-triangle-exclamation mr-1"></i>模擬：剩餘 3 天
 				</button>
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-			<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-				<p class="text-sm text-gray-500 mb-1">全公司整體完課率</p>
-				<div class="flex items-end gap-2">
-					<h3 class="text-3xl font-bold text-gray-900">78%</h3>
-					<span class="text-sm text-green-500 mb-1"><i class="fa-solid fa-arrow-trend-up"></i> +5%</span>
+		<div id="chat-container" class="flex-1 overflow-y-auto p-6 space-y-6 flex flex-col">
+			<div class="flex gap-4 max-w-2xl">
+				<div class="w-8 h-8 rounded bg-micro flex items-center justify-center shrink-0 mt-1"><i class="fa-solid fa-robot text-xs text-white"></i></div>
+				<div class="bg-dark-800 border border-gray-700 p-4 rounded-2xl rounded-tl-sm shadow-sm text-sm text-gray-300">
+					您好！我是您的專屬學習助理，系統將會在此提醒您的課程進度。您可以點擊右上角按鈕模擬不同情境的推播。
 				</div>
-				<div class="w-full bg-gray-200 rounded-full h-2 mt-4">
-					<div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
-				</div>
-			</div>
-			<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-				<p class="text-sm text-gray-500 mb-1">逾期未完成人數</p>
-				<h3 class="text-3xl font-bold text-red-500">24 <span class="text-base font-normal text-gray-500">人</span></h3>
-				<p class="text-xs text-gray-400 mt-2">主要集中於：行銷部、行政部</p>
-			</div>
-			<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-				<p class="text-sm text-gray-500 mb-1">本月 AI 自動提醒次數</p>
-				<h3 class="text-3xl font-bold text-gray-900">156 <span class="text-base font-normal text-gray-500">次</span></h3>
-				<p class="text-xs text-gray-400 mt-2">成功喚回率：68%</p>
 			</div>
 		</div>
 
-		<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-			<div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-				<h3 class="font-bold text-gray-800">進度落後名單 (優先關注)</h3>
+		<div class="bg-dark-800 border-t border-gray-800 p-4 shrink-0">
+			<div class="max-w-4xl mx-auto flex gap-3">
+				<input type="text" id="learner-input" value="這影片講太快根本聽不懂，而且我最近案子超多哪有時間看啦！" class="flex-1 bg-dark-900 border border-gray-600 text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:border-micro">
+				<button onclick="submitLearnerFeedback()" class="bg-micro hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors whitespace-nowrap">
+					<i class="fa-solid fa-paper-plane mr-2"></i>送出回饋
+				</button>
 			</div>
-			<table class="min-w-full divide-y divide-gray-200 text-left text-sm">
-				<thead class="bg-gray-50 text-gray-500">
-				<tr>
-					<th class="px-6 py-3 font-medium">員工姓名</th>
-					<th class="px-6 py-3 font-medium">部門</th>
-					<th class="px-6 py-3 font-medium">課程名稱</th>
-					<th class="px-6 py-3 font-medium">目前進度</th>
-					<th class="px-6 py-3 font-medium">操作</th>
-				</tr>
-				</thead>
-				<tbody class="divide-y divide-gray-200 bg-white">
-				<tr>
-					<td class="px-6 py-4 font-medium text-gray-900">王大明</td>
-					<td class="px-6 py-4 text-gray-500">行銷部</td>
-					<td class="px-6 py-4 text-gray-500">資安基礎與社交工程防範</td>
-					<td class="px-6 py-4 text-red-500 font-bold">0%</td>
-					<td class="px-6 py-4">
-						<button class="text-indigo-600 hover:text-indigo-900 font-medium">AI 獨立催繳</button>
-					</td>
-				</tr>
-				<tr>
-					<td class="px-6 py-4 font-medium text-gray-900">林小美</td>
-					<td class="px-6 py-4 text-gray-500">行政部</td>
-					<td class="px-6 py-4 text-gray-500">微程式跨領域通識</td>
-					<td class="px-6 py-4 text-yellow-600 font-bold">45%</td>
-					<td class="px-6 py-4">
-						<button class="text-indigo-600 hover:text-indigo-900 font-medium">AI 獨立催繳</button>
-					</td>
-				</tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
 
-	<div id="tab-learner" class="hidden max-w-3xl mx-auto">
-
-		<div class="mb-6 flex justify-center gap-4">
-			<button onclick="switchTone('warm')" id="btn-warm" class="px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700 border border-green-200 shadow-sm transition-all">模擬：兩週前 (溫馨語氣)</button>
-			<button onclick="switchTone('urgent')" id="btn-urgent" class="px-4 py-2 rounded-full text-sm font-bold bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all">模擬：三天前 (急迫語氣)</button>
-		</div>
-
-		<div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden flex flex-col h-[500px]">
-			<div class="bg-gray-800 px-4 py-3 flex items-center gap-3">
-				<div class="w-10 h-10 rounded-full bg-micro flex items-center justify-center text-white font-bold">AI</div>
-				<div>
-					<h3 class="text-white font-bold text-sm">微程式學習小幫手</h3>
-					<p class="text-gray-400 text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> 機器人</p>
-				</div>
-			</div>
-
-			<div class="flex-grow p-6 bg-gray-50 overflow-y-auto flex flex-col justify-end gap-4">
-
-				<div id="msg-warm" class="flex gap-4">
-					<div class="w-8 h-8 rounded-full bg-micro flex-shrink-0 flex items-center justify-center text-white text-xs">AI</div>
-					<div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 max-w-[80%] text-sm text-gray-700">
-						<p class="mb-2">哈囉！最近專案辛苦了 ☕</p>
-						<p class="mb-3">系統看見您的<span class="font-bold">「微程式跨領域通識」</span>課程還有兩週到期（目前進度 0%）。本週五下午剛好有一段空檔，要不要順便把課程看完呢？隨時保持專業技能的成長喔！</p>
-						<div class="border-t border-gray-100 pt-3 flex gap-2">
-							<button class="flex-1 bg-indigo-50 text-indigo-600 py-2 rounded-lg font-medium hover:bg-indigo-100 transition-colors">前往上課</button>
-							<button class="flex-1 bg-gray-50 text-gray-500 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">加入行事曆</button>
-						</div>
-					</div>
-				</div>
-
-				<div id="msg-urgent" class="flex gap-4 hidden">
-					<div class="w-8 h-8 rounded-full bg-micro flex-shrink-0 flex items-center justify-center text-white text-xs">AI</div>
-					<div class="bg-red-50 p-4 rounded-2xl rounded-tl-none shadow-sm border border-red-100 max-w-[80%] text-sm text-gray-800">
-						<div class="flex items-center gap-2 text-red-600 font-bold mb-2">
-							<i class="fa-solid fa-triangle-exclamation"></i>
-							<span>【重要提醒】課程即將逾期</span>
-						</div>
-						<p class="mb-3">您的<span class="font-bold">「資安基礎與社交工程防範」</span>課程將於 <span class="font-bold text-red-600">3 天後到期</span>！目前進度仍為 0%。</p>
-						<p class="mb-3 text-xs text-gray-500">此為年度指定培訓，為避免影響您的部門完課率與後續考核，請務必於本週五前完成。</p>
-						<div class="border-t border-red-200 pt-3">
-							<button class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors shadow-sm">立即前往完成課程</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="p-3 bg-white border-t border-gray-200">
-				<div class="bg-gray-100 rounded-full px-4 py-2 text-gray-400 text-sm">輸入對話... (例如：幫我查詢本月還有什麼課沒上)</div>
-			</div>
-		</div>
-	</div>
 </main>
 
-<footer class="bg-white border-t border-gray-200 mt-auto">
-	<div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
-		<p>UI Prototype Designed & Coded by 劉亮妤 (Liang-Yu, Liu) | 專為微程式資訊簡報規劃設計</p>
-	</div>
-</footer>
-
 <script>
-	function switchTab(tabId) {
-		// 控制內容區塊顯示/隱藏
-		document.getElementById('tab-dashboard').classList.toggle('hidden', tabId !== 'dashboard');
-		document.getElementById('tab-dashboard').classList.toggle('block', tabId === 'dashboard');
-		document.getElementById('tab-learner').classList.toggle('hidden', tabId !== 'learner');
-		document.getElementById('tab-learner').classList.toggle('block', tabId === 'learner');
+	// Tab Switching Logic
+	function switchTab(tab) {
+		const hrView = document.getElementById('view-hr');
+		const learnerView = document.getElementById('view-learner');
+		const navHr = document.getElementById('nav-hr');
+		const navLearner = document.getElementById('nav-learner');
 
-		// 控制按鈕樣式
-		const btnDash = document.getElementById('btn-dashboard');
-		const btnLearn = document.getElementById('btn-learner');
+		if (tab === 'hr') {
+			hrView.classList.remove('hidden');
+			hrView.classList.add('flex');
+			learnerView.classList.add('hidden');
+			learnerView.classList.remove('flex');
 
-		if (tabId === 'dashboard') {
-			btnDash.className = "px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-micro transition-all";
-			btnLearn.className = "px-4 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-all";
+			navHr.className = "w-full flex items-center px-4 py-3 bg-micro/10 text-micro border-r-2 border-micro rounded-l-lg transition-all duration-200";
+			navLearner.className = "w-full flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-all duration-200";
 		} else {
-			btnLearn.className = "px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-micro transition-all";
-			btnDash.className = "px-4 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-900 transition-all";
+			learnerView.classList.remove('hidden');
+			learnerView.classList.add('flex');
+			hrView.classList.add('hidden');
+			hrView.classList.remove('flex');
+
+			navLearner.className = "w-full flex items-center px-4 py-3 bg-micro/10 text-micro border-r-2 border-micro rounded-l-lg transition-all duration-200";
+			navHr.className = "w-full flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-all duration-200";
 		}
 	}
 
-	function switchTone(tone) {
-		// 控制訊息顯示/隱藏
-		document.getElementById('msg-warm').classList.toggle('hidden', tone !== 'warm');
-		document.getElementById('msg-urgent').classList.toggle('hidden', tone !== 'urgent');
+	// HR View: Stage D (Downwards) - Refine Text
+	function processHrRefine() {
+		const btn = document.getElementById('btn-refine');
+		const resultArea = document.getElementById('hr-refined-result');
 
-		// 控制按鈕樣式
-		const btnWarm = document.getElementById('btn-warm');
-		const btnUrgent = document.getElementById('btn-urgent');
+		// Simulation UI States
+		btn.disabled = true;
+		btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-micro"></i> AI 分析潤飾中...';
+		btn.classList.replace('bg-gray-700', 'bg-gray-800');
+		resultArea.classList.add('hidden');
 
-		if (tone === 'warm') {
-			btnWarm.className = "px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700 border border-green-200 shadow-sm transition-all";
-			btnUrgent.className = "px-4 py-2 rounded-full text-sm font-bold bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all";
-		} else {
-			btnUrgent.className = "px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700 border border-red-200 shadow-sm transition-all";
-			btnWarm.className = "px-4 py-2 rounded-full text-sm font-bold bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 transition-all";
+		// Simulate 1s Delay
+		setTimeout(() => {
+			btn.disabled = false;
+			btn.innerHTML = '<i class="fa-solid fa-rotate-right text-micro"></i> 重新潤飾';
+			btn.classList.replace('bg-gray-800', 'bg-gray-700');
+			resultArea.classList.remove('hidden');
+		}, 1000);
+	}
+
+	function sendOfficialNotice() {
+		alert("公告已成功下發至員工通訊端！");
+		document.getElementById('hr-refined-result').classList.add('hidden');
+		document.getElementById('btn-refine').innerHTML = '<i class="fa-solid fa-wand-magic-sparkles text-micro"></i> AI 專業潤飾';
+	}
+
+	// Learner View: Stage B & C - Custom Tone Push Notifications
+	function triggerAIChat(type) {
+		const container = document.getElementById('chat-container');
+		let contentHTML = '';
+
+		if (type === '14d') {
+			contentHTML = `
+                    <div class="flex gap-4 max-w-2xl animate-slide-up">
+                        <div class="w-8 h-8 rounded bg-micro flex items-center justify-center shrink-0 mt-1"><i class="fa-solid fa-robot text-xs text-white"></i></div>
+                        <div class="bg-dark-800 border border-gray-600 p-5 rounded-2xl rounded-tl-sm shadow-sm flex flex-col gap-3">
+                            <h4 class="text-white font-bold"><i class="fa-solid fa-mug-hot text-yellow-500 mr-2"></i>溫馨提醒</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed">哈囉！最近專案辛苦了～系統發現您還有一堂『跨領域通識』尚未完成，距離死線還有 <span class="text-white font-bold">14 天</span>。<br>本週如果有空檔，不妨泡杯咖啡順便看完當作充電喔！</p>
+                            <button class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium py-2 rounded-lg mt-2 transition-colors flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-play"></i>一鍵前往上課
+                            </button>
+                        </div>
+                    </div>
+                `;
+		} else if (type === '3d') {
+			contentHTML = `
+                    <div class="flex gap-4 max-w-2xl animate-slide-up">
+                        <div class="w-8 h-8 rounded bg-micro flex items-center justify-center shrink-0 mt-1"><i class="fa-solid fa-robot text-xs text-white"></i></div>
+                        <div class="bg-[#2D1618] border border-red-600/50 p-5 rounded-2xl rounded-tl-sm shadow-[0_0_15px_rgba(230,0,18,0.15)] flex flex-col gap-3">
+                            <h4 class="text-red-400 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i>急迫警告：即將逾期</h4>
+                            <p class="text-sm text-gray-200 leading-relaxed">【重要通知】您的課程將於 <span class="text-red-400 font-bold">3 天後逾期</span>！<br>為避免影響您的年度績效考核，請務必立即撥空完成。</p>
+                            <button class="bg-micro hover:bg-red-700 text-white text-sm font-medium py-2 rounded-lg mt-2 transition-colors flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(230,0,18,0.4)]">
+                                <i class="fa-solid fa-bolt"></i>立即前往上課
+                            </button>
+                        </div>
+                    </div>
+                `;
 		}
+
+		container.insertAdjacentHTML('beforeend', contentHTML);
+		scrollToBottom();
+	}
+
+	// Learner View: Stage D (Upwards) - Semantic Convergence / Denoising
+	function submitLearnerFeedback() {
+		const inputEl = document.getElementById('learner-input');
+		const text = inputEl.value.trim();
+		if(!text) return;
+
+		const container = document.getElementById('chat-container');
+
+		// 1. Show user's original message
+		const userMsg = `
+                <div class="flex gap-4 max-w-2xl self-end flex-row-reverse animate-fade-in">
+                    <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center shrink-0 mt-1 text-xs">我</div>
+                    <div class="bg-gray-700 p-3 rounded-2xl rounded-tr-sm text-sm text-white">${text}</div>
+                </div>
+            `;
+		container.insertAdjacentHTML('beforeend', userMsg);
+
+		// Clear input
+		const originalVal = inputEl.value;
+		inputEl.value = '';
+		scrollToBottom();
+
+		// 2. Simulate AI Intercept & Denoising (Delay)
+		setTimeout(() => {
+			const interceptMsg = `
+                    <div class="flex gap-4 max-w-2xl animate-slide-up ai-intercept-block">
+                        <div class="w-8 h-8 rounded bg-micro flex items-center justify-center shrink-0 mt-1 shadow-[0_0_8px_rgba(230,0,18,0.8)]"><i class="fa-solid fa-filter text-xs text-white"></i></div>
+                        <div class="bg-dark-800 border border-micro/50 p-5 rounded-2xl rounded-tl-sm shadow-sm flex flex-col gap-3">
+                            <h4 class="text-micro font-bold text-sm"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI 語意收斂與降噪</h4>
+                            <p class="text-sm text-gray-300 mb-1">為提升處理效率，AI 已為您歸納客觀重點：</p>
+                            <ul class="list-decimal ml-5 text-sm text-white font-medium space-y-1 bg-dark-900 p-3 rounded border border-gray-700">
+                                <li>建議調整教材難度（語速過快）。</li>
+                                <li>近期專案負載過高，時間無法配合。</li>
+                            </ul>
+                            <p class="text-xs text-gray-400 mt-1">請問是否確認以此結構化重點送出給管理中心？</p>
+                            <div class="flex gap-3 mt-3">
+                                <button onclick="confirmFeedback(this)" class="flex-1 bg-micro hover:bg-red-700 text-white text-sm font-medium py-2 rounded transition-colors">確認送出</button>
+                                <button onclick="cancelFeedback(this, '${originalVal}')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium py-2 rounded transition-colors border border-gray-600">重新編輯</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+			container.insertAdjacentHTML('beforeend', interceptMsg);
+			scrollToBottom();
+		}, 600);
+	}
+
+	// Actions for AI Intercept Block
+	function confirmFeedback(btnEl) {
+		const block = btnEl.closest('.ai-intercept-block');
+		block.innerHTML = `
+                <div class="w-8 h-8 rounded bg-green-600 flex items-center justify-center shrink-0 mt-1"><i class="fa-solid fa-check text-xs text-white"></i></div>
+                <div class="bg-dark-800 border border-green-600/50 p-3 rounded-2xl rounded-tl-sm text-sm text-green-400 font-medium">
+                    已成功將您的清晰意見送出給 HR 管理中心。
+                </div>
+            `;
+	}
+
+	function cancelFeedback(btnEl, originalText) {
+		const inputEl = document.getElementById('learner-input');
+		inputEl.value = originalText;
+		btnEl.closest('.flex.gap-4.max-w-2xl').remove();
+		inputEl.focus();
+	}
+
+	// Utility: Auto scroll chat to bottom
+	function scrollToBottom() {
+		const container = document.getElementById('chat-container');
+		container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
 	}
 </script>
 </body>
